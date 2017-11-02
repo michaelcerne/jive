@@ -1,0 +1,70 @@
+/* html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: 'Arial', san-serif;
+	font-size: 16px;
+}
+
+body #descriptor {
+	text-align: center;
+}
+
+div#msgbox {
+	height: 75%;
+	width: 100%;
+}
+
+div.msg {
+	position: relative;
+	height: 4rem;
+	width: 100%;
+	border-bottom: 1px solid red;
+}
+
+div.msg p {
+	position: absolute;
+}
+
+div.msg p:nth-child(1) {
+	top: 0;
+	left: 0.5rem;
+	float: left;
+	margin-right: 0.5rem;
+}
+
+div.msg p:nth-child(1)::after {
+	content: ":";
+}
+
+div.msg p:nth-child(2) {
+	left: 4rem;
+	margin-left: 0.5rem;
+	float: left;
+}
+
+div.msg a:nth-child(3) {
+	right: 0;
+	margin-right: 0.5rem;
+	float: right;
+}
+
+div#msgin {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+} */
+
+h1#descriptor {
+	text-align: center;
+	font-size: 3rem;
+}
+
+.login-link-text {
+	color: #2BC016
+}
+
+.login-link-text:hover {
+	color: white
+}

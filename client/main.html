@@ -1,0 +1,80 @@
+<head>
+  <title>jive - Interactive Messaging</title>
+</head>
+
+<body>
+  <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item">
+        <img src="/jive-markup.png" alt="jive - messaging">
+      </a>
+      <a class="navbar-item">
+        {{> loginButtons}}
+      </a>
+    </div>
+  </nav>
+  <h1 id="descriptor">jive</h1>
+  <div class="columns">
+    <div class="column"></div>
+    <div class="column">
+      {{> messages}}
+      <div style="padding-top:1rem">
+        {{> messageinput}}
+      </div>
+    </div>
+    <div class="column"></div>
+  </div>
+</body>
+
+<template name="messages">
+  <div id="msgbox">
+    {{#each message}}
+      {{> messageli}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="messageli">
+  <article class="media">
+    <figure class="media-left">
+      <p class="is-64x64">
+        <div style="width:64px;height:64px;text-align:center;background:{{color}}"><a style="color:black;text-transform:uppercase;vertical-align:middle;float:middle;font-size:2.5rem">{{usernamechar}}</a></div>
+      </p>
+    </figure>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong>{{username}}</strong> <small>@{{username}}</small> <small>{{time}}</small>
+          <br>
+          {{content}}
+        </p>
+      </div>
+    </div>
+    <div class="media-right">
+      <button class="delete msgdel"></button>
+    </div>
+  </article>
+</template>
+
+<template name="messageinput">
+  {{#if currentUser }}
+    <form class="field has-addons">
+      <div class="control is-expanded">
+        <input class="input is-fullwidth" type="text" id="msgval" placeholder="Enter message">
+      </div>
+      <div class="control">
+        <button type="submit" class="button is-link">Send</button>
+      </div>
+    </form>
+  {{else}}
+    <p>Login to message</p>
+    <form class="field has-addons" alt="Login to message">
+      <div class="control is-expanded">
+        <input class="input is-fullwidth" type="text" disabled id="msgval" placeholder="Enter message">
+      </div>
+      <div class="control">
+        <button type="submit" disabled class="button is-link">Send</button>
+      </div>
+    </form>
+  {{/if}}
+</template>
