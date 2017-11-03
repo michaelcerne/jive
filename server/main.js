@@ -37,6 +37,11 @@ Meteor.publish('Messages', function messages() {
     return Messages.find();
 });
 
+Meteor.publish("userData", function () {
+    return Meteor.users.find({},
+        {fields: {'sent': 1}});
+});
+
 Meteor.startup(() => {
 });
 
@@ -57,9 +62,14 @@ Meteor.methods({
       color: rndcolor(),
       createdAt: new Date()
     });
+    console.log(Meteor.users.findOne({_id:Meteor.userId()}));
+    if (Meteor.users.findOne({_id:Meteor.userId()})["sent"] == undefined) {
+    	Meteor.users.update( { _id: Meteor.userId() }, { $set: {sent : 0}})
+    };
+    Meteor.users.update({_id:Meteor.userId()},{$set:{sent : parseInt(Meteor.user()["sent"], 10) + 1}}) 
   },
   'msgdel': function(val){
-  	if (!Messages.findOne({ "_id":val, userid:Meteor.userId()})) {
+  	if (!Messages.findOne({ _id:val, userid:Meteor.userId()})) {
   		throw new Meteor.Error(403, 'Error 403: No Access', 'user is not logged in');
   		return
   	};

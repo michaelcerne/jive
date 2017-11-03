@@ -11,6 +11,7 @@ Accounts.ui.config({
 });
 
 Template.body.onCreated(function bodyOnCreated() {
+	Meteor.subscribe('userData');
   Meteor.subscribe('Messages');
 });
 
@@ -34,6 +35,10 @@ Template.messageli.helpers({
     	} else {
     		return str.charAt(0);
     	}
+    },
+    'sent': function() {
+    	var user = Messages.findOne({"_id":this._id})["userid"];
+    	return Meteor.users.findOne({"_id":user})['sent']
     },
     'owned': function() {
   		if (Messages.findOne({"_id":this._id})["userid"] == Meteor.userId()) {
