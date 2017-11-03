@@ -65,7 +65,9 @@
       </div>
     </div>
     <div class="media-right">
-      <button class="delete msgdel"></button>
+      {{#if owned}}
+        <button class="delete msgdel"></button>
+      {{/if}}
     </div>
   </article>
 </template>
