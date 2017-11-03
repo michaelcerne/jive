@@ -61,9 +61,12 @@
     <form class="field has-addons">
       <div class="control is-expanded">
         <input class="input is-fullwidth" type="text" id="msgval" placeholder="Enter message">
+        <a id="emoji-ico">emoji</a>
       </div>
       <div class="control">
         <button type="submit" class="button is-link">Send</button>
+      </div>
+      <div id="emoji">
       </div>
     </form>
   {{else}}
@@ -75,6 +78,7 @@
       <div class="control">
         <button type="submit" disabled class="button is-link">Send</button>
       </div>
+      
     </form>
   {{/if}}
 </template>

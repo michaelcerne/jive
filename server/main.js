@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 function count(obj) { return Object.keys(obj).length; }
 
 function rndcolor() {
+    var ran = "#00EE76";
 	switch (Math.round(Math.random()*10)) {
     case 0:
         ran = "#00EE76";
@@ -38,7 +39,7 @@ Meteor.methods({
   		throw new Meteor.Error(403, 'Error 403: No Access', 'user is not logged in');
   		return
   	};
-  	if (count(Messages.find({}, {sort: { "createdAt" : 1 }}).fetch()) >= 10) {
+  	if (count(Messages.find({}, {sort: { "createdAt" : 1 }}).fetch()) >= 5) {
   		var postval = Messages.find({}, {sort: { "createdAt" : 1 }, limit: 1}).fetch()[0]["_id"];
   		Messages.remove({ _id: postval });
   	};
