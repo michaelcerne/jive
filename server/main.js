@@ -39,7 +39,7 @@ Meteor.publish('Messages', function messages() {
 
 Meteor.publish("userData", function () {
     return Meteor.users.find({},
-        {fields: {'sent': 1}});
+        {fields: {'sent': 1, 'color': 1}});
 });
 
 Meteor.startup(() => {
@@ -55,14 +55,18 @@ Meteor.methods({
   		var postval = Messages.find({}, {sort: { "createdAt" : 1 }, limit: 1}).fetch()[0]["_id"];
   		Messages.remove({ _id: postval });
   	};
+  	if (Meteor.users.findOne({_id:Meteor.userId()})["color"] == undefined) {
+  		var rndcol = rndcolor();
+  		Meteor.users.update( { _id: Meteor.userId() }, { $set: {color : rndcol}})
+  	};
+  	var usercolor = Meteor.users.findOne({_id:Meteor.userId()})["color"];
 		Messages.insert({
   		username: Meteor.user().username,
   		userid: Meteor.userId(),
       content: val,
-      color: rndcolor(),
+      color: usercolor,
       createdAt: new Date()
     });
-    console.log(Meteor.users.findOne({_id:Meteor.userId()}));
     if (Meteor.users.findOne({_id:Meteor.userId()})["sent"] == undefined) {
     	Meteor.users.update( { _id: Meteor.userId() }, { $set: {sent : 0}})
     };

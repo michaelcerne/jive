@@ -3,6 +3,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Accounts } from 'meteor/accounts-base';
 import { Chronos } from 'meteor/remcoder:chronos';
 import { moment } from 'meteor/momentjs:moment';
+import { Streamy } from 'meteor/yuukan:streamy';
 
 import './main.html';
 
@@ -49,6 +50,15 @@ Template.messageli.helpers({
     }
 });
 
+Template.messageinput.helpers({
+		'username' : function() {
+			return Meteor.user()["username"]
+		},
+    'usercolor' : function() {
+			return Meteor.user()["color"]
+    }
+});
+
 Template.statusBar.helpers({
     'status': function(){
     	if (Meteor.status().status == "connected" && Meteor.status().connected == true) {
@@ -72,7 +82,7 @@ Template.messageinput.events({
     var val = document.getElementById('msgval').value;
     Meteor.call('msgadd', val);
     document.getElementById('msgval').value = ""
-}
+		}	
 });
 
 Template.messageli.events({

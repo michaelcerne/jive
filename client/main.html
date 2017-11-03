@@ -75,6 +75,9 @@
 <template name="messageinput">
   {{#if currentUser }}
     <form class="field has-addons">
+      <div class="control">
+        <p type="submit" style="cursor:default;background:{{usercolor}}" class="button">{{username}}:</p>
+      </div>
       <div class="control is-expanded">
         <input class="input is-fullwidth" type="text" id="msgval" placeholder="Enter message">
       </div>
