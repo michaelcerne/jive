@@ -5,31 +5,38 @@ function count(obj) { return Object.keys(obj).length; }
 function rndcolor() {
 	switch (Math.round(Math.random()*10)) {
     case 0:
-        ran = "#00EE76";
-        break;
+      ran = "#00EE76";
+      break;
     case 1:
-        ran = "#00E5EE";
-        break;
+      ran = "#00E5EE";
+      break;
     case 2:
-        ran = "#EEEE00";
-        break;
+      ran = "#EEEE00";
+      break;
     case 3:
-        ran = "#FA8072";
-        break;
+      ran = "#FA8072";
+      break;
     case 4:
-        ran = "#FF6EB4";
-        break;
+      ran = "#FF6EB4";
+      break;
     case 5:
-        ran = "#FFFFAA";
-        break;
+      ran = "#FFFFAA";
+      break;
     case 6:
-        ran = "#7AA9DD";
-	}
+      ran = "#7AA9DD";
+      break;
+    default:
+    	ran = "#FA8072";
+    	break;
+	};
 	return ran
 }
 
+Meteor.publish('Messages', function messages() {
+    return Messages.find();
+});
+
 Meteor.startup(() => {
-  // code to run on server at startup
 });
 
 Meteor.methods({

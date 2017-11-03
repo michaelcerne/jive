@@ -8,6 +8,10 @@ Accounts.ui.config({
   passwordSignupFields: 'USERNAME_AND_OPTIONAL_EMAIL'
 });
 
+Template.body.onCreated(function bodyOnCreated() {
+  Meteor.subscribe('Messages');
+});
+
 Template.messages.helpers({
     'message': function(){
         return Messages.find();
@@ -25,9 +29,29 @@ Template.messageli.helpers({
     },
     'usernamechar': function(){
     	var str = Messages.findOne({"_id":this._id})["username"];
-    	return str.charAt(0);
+    	if (typeof str == 'undefined') {
+    		return 1;
+    	} else {
+    		return str.charAt(0);
+    	}
     }
+});
 
+Template.statusBar.helpers({
+    'status': function(){
+    	if (Meteor.status().status == "connected" && Meteor.status().connected == true) {
+    		return "Connected"
+    	} else {
+    		return "Experiencing Issues. Click to reconnect"
+    	}
+    }
+});
+
+Template.statusBar.events({
+    'click a': function(event){
+    event.preventDefault();
+    Meteor.reconnect()
+}
 });
 
 Template.messageinput.events({
