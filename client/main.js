@@ -1,6 +1,10 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Accounts } from 'meteor/accounts-base';
+import { Chronos } from 'meteor/remcoder:chronos';
+import { moment } from 'meteor/momentjs:moment';
+import { jquery, $ } from 'jquery';
+import EmojiPicker from "rm-emoji-picker";
 
 import './main.html';
 
@@ -19,10 +23,8 @@ Template.messages.helpers({
 });
 
 Template.messageli.helpers({
-    'time': function(){
-    	var diff = Math.abs(Messages.find({"_id":this._id}).fetch()[0]["createdAt"] - new Date());
-    	var minutes = Math.floor((diff/1000)/60);
-      return minutes + "m";
+    'time' : function() {
+		return Chronos.moment(Messages.find({"_id":this._id}).fetch()[0]["createdAt"]).fromNow();
     },
     'color': function(){
     	return Messages.findOne({"_id":this._id})["color"]
@@ -70,3 +72,13 @@ Template.messageli.events({
     Meteor.call('msgdel', val)
 }
 });
+ 
+//First construct an instance of EmojiPicker
+const picker = new EmojiPicker();
+ 
+//Next tell it where to listen for a click, the container it should be appended to, and the input/textarea/contenteditable it needs to work with
+const icon      = document.getElementById('emoji-ico');
+const container = document.getElementById('emoji');
+const editable  = document.getElementById('msgval');
+ 
+picker.listenOn(icon, container, editable);

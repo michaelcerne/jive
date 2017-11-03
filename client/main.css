@@ -13,6 +13,7 @@ body #descriptor {
 
 div#msgbox {
 	height: 75%;
+	max-width: 100vh;
 	width: 100%;
 }
 
