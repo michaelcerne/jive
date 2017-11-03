@@ -34,6 +34,13 @@ Template.messageli.helpers({
     	} else {
     		return str.charAt(0);
     	}
+    },
+    'owned': function() {
+  		if (Messages.findOne({"_id":this._id})["userid"] == Meteor.userId()) {
+  			return true
+  		} else {
+  			return false
+  		}
     }
 });
 
