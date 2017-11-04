@@ -14,13 +14,24 @@
 </head>
 
 <body>
-  <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item">
         <img src="/jive-markup.png" alt="jive - messaging">
       </a>
       <a class="navbar-item">
-        {{> loginButtons}}
+        {{#if currentUser}}
+          <p>Logged in: {{currentUser.username}}</p>
+        {{else}}
+          <a href="/signup">Sign Up</a>
+        {{/if}}
+      </a>
+      <a class="navbar-item">
+        {{#if currentUser}}
+          <a id="signout">Sign out</a>
+        {{else}}
+          <a href="/login">Log In</a>
+        {{/if}}
       </a>
     </div>
     <div class="navbar-end">
@@ -30,15 +41,17 @@
   <h1 id="descriptor">jive</h1>
   <div class="columns">
     <div class="column"></div>
-    <div class="column">
-      {{> messages}}
-      <div style="padding-top:1rem">
-        {{> messageinput}}
-      </div>
-    </div>
+    <div class="column" id="root"></div>
     <div class="column"></div>
   </div>
 </body>
+
+<template name="main">
+  {{> messages}}
+  <div style="padding-top:1rem">
+    {{> messageinput}}
+  </div>
+</template>
 
 <template name="messages">
   <div id="msgbox">

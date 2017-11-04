@@ -6,14 +6,34 @@ import { moment } from 'meteor/momentjs:moment';
 import { Streamy } from 'meteor/yuukan:streamy';
 
 import './main.html';
+import './login.js';
 
 Accounts.ui.config({
-  passwordSignupFields: 'USERNAME_AND_OPTIONAL_EMAIL'
+  passwordSignupFields: 'USERNAME_ONLY'
 });
 
 Template.body.onCreated(function bodyOnCreated() {
 	Meteor.subscribe('userData');
   Meteor.subscribe('Messages');
+});
+
+Template.body.onRendered(function(){
+	var root = document.getElementById('root');
+	var path = document.location.pathname;
+  if (path == "/login") {
+  	Blaze.render(Template.login, root)
+  } else if (path == "/signup") {
+  	Blaze.render(Template.signup, root)
+  } else {
+  	Blaze.render(Template.main, root)
+  }
+});
+
+Template.body.events({
+    'click #signout': function(event){
+    event.preventDefault();
+    Accounts.logout()
+	}
 });
 
 Template.messages.helpers({

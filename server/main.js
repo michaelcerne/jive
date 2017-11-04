@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import './account.js';
 
 function count(obj) { return Object.keys(obj).length; }
 

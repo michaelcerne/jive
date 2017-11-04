@@ -2,11 +2,3 @@ h1#descriptor {
 	text-align: center;
 	font-size: 3rem;
 }
-
-.login-link-text {
-	color: #2BC016
-}
-
-.login-link-text:hover {
-	color: white
-}

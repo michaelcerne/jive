@@ -1,0 +1,76 @@
+<template name="signup">
+  <section class="hero is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="column is-4 is-offset-4">
+          {{#if error}}
+            <div class="notification is-danger" id="err">
+              {{errorval}}
+            </div>
+          {{/if}}
+          <h3 class="title has-text-grey">Signup</h3>
+          <p class="subtitle has-text-grey">Please create an account to proceed.</p>
+          <div class="box">
+            <form>
+              <div class="field">
+                <div class="control">
+                  <input class="input is-large" type="text" id="username" placeholder="Your Username" autofocus="">
+                </div>
+              </div>
+              <div class="field">
+                <div class="control">
+                  <input class="input is-large" type="password" id="password" placeholder="Your Password">
+                </div>
+              </div>
+              <div class="field">
+                <div class="control">
+                  <input class="input is-large" type="password" id="password2" placeholder="Your Password (again)">
+                </div>
+              </div>
+              <button type="submit" class="button is-block is-info is-large" style="width:100%">Signup</button>
+            </form>
+          </div>
+          <p class="has-text-grey">
+            <a href="/login">Login</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<template name="login">
+  <section class="hero is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="column is-4 is-offset-4">
+          {{#if error}}
+            <div class="notification is-danger" id="err">
+              {{errorval}}
+            </div>
+          {{/if}}
+          <h3 class="title has-text-grey">Login</h3>
+          <p class="subtitle has-text-grey">Please login to proceed.</p>
+          <div class="box">
+            <form>
+              <div class="field">
+                <div class="control">
+                  <input class="input is-large" type="text" id="username" placeholder="Your Username" autofocus="">
+                </div>
+              </div>
+              <div class="field">
+                <div class="control">
+                  <input class="input is-large" type="password" id="password" placeholder="Your Password">
+                </div>
+              </div>
+              <button type="submit" class="button is-block is-info is-large" style="width:100%">Login</button>
+            </form>
+          </div>
+          <p class="has-text-grey">
+            <a href="/signup">Sign Up</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
