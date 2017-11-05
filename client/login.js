@@ -17,6 +17,7 @@ Template.signup.events({
     var passv = document.getElementById('password2').value;
     var newUserData = {
       username: usern,
+      password: passw
     };
     if(!passw == passv) {
       template.errorstate.set("Error: Error 500: Password Fault, Password Match Failure [500]");
