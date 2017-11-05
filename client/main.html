@@ -19,20 +19,21 @@
       <a class="navbar-item" href="/">
         <img src="/img/jive-markup.png" alt="jive - messaging">
       </a>
-      <a class="navbar-item">
-        {{#if currentUser}}
+      {{#if currentUser}}
+        <a class="navbar-item">
           <p>Logged in: {{currentUser.username}}</p>
-        {{else}}
-          <a href="/signup">Sign Up</a>
-        {{/if}}
-      </a>
-      <a class="navbar-item">
-        {{#if currentUser}}
-          <a id="signout">Sign out</a>
-        {{else}}
-          <a href="/login">Log In</a>
-        {{/if}}
-      </a>
+        </a>
+        <a class="navbar-item" id="signout">
+          <a>Sign out</a>
+        </a>
+      {{else}}
+        <a class="navbar-item" href="/signup">
+          <a>Sign Up</a>
+        </a>
+        <a class="navbar-item" href="/login">
+          <a>Log In</a>
+        </a>
+      {{/if}}
     </div>
     <div class="navbar-end">
       {{> statusBar}}
@@ -40,7 +41,7 @@
   </nav>
   <div class="columns">
     <div class="column"></div>
-    <div class="column is-three-quarters" id="root"></div>
+    <div class="column is-10" id="root"></div>
     <div class="column"></div>
   </div>
 </body>

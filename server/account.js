@@ -2,8 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
 function rndcolor() {
-    var ran = "#00EE76";
-	switch (Math.floor(Math.random() * 15)) {
+  var ran = "#00EE76";
+  switch(Math.floor(Math.random() * 15)) {
     case 0:
       ran = "#00EE76";
       break;
@@ -53,36 +53,40 @@ function rndcolor() {
       ran = "#FF4040";
       break;
     default:
-    	ran = "#FF3030";
-    	break;
-	};
-	return ran
+      ran = "#FF3030";
+      break;
+  };
+  return ran
 }
 
 Accounts.onCreateUser((options, user) => {
-	var rndcol = rndcolor();
-	user.color = rndcol;
+  var rndcol = rndcolor();
+  user.color = rndcol;
   return user;
 });
 
 Meteor.methods({
-	'userCreate': function(newUserData){
-		if (newUserData["username"] == "") {
-			throw new Meteor.Error(500, 'Error 500: Username Fault, No Username', 'No Username');
-			return
-		};
-		if (newUserData["username"].length < 5) {
-			throw new Meteor.Error(500, 'Error 500: Username Fault, Not 6 Digits', 'Not 6 Digits');
-			return
-		};
-		if (newUserData["password"] == "") {
-			throw new Meteor.Error(500, 'Error 500: Password Fault, No Password', 'No Password');
-			return
-		};
-		if (newUserData["password"].length < 5) {
-			throw new Meteor.Error(500, 'Error 500: Password Fault, Not 6 Digits', 'Not 6 Digits');
-			return
-		};
-  	return Accounts.createUser(newUserData);
+  'userCreate': function(newUserData) {
+    if(newUserData["username"] == "") {
+      throw new Meteor.Error(500, 'Error 500: Username Fault, No Username', 'No Username');
+      return
+    };
+    if(newUserData["username"].length < 5) {
+      throw new Meteor.Error(500, 'Error 500: Username Fault, Not 6 Digits', 'Not 6 Digits');
+      return
+    };
+    if(newUserData["username"].length > 19) {
+      throw new Meteor.Error(500, 'Error 500: Username Fault, Over 18 Digits', 'Over 18 Digits');
+      return
+    };
+    if(newUserData["password"] == "") {
+      throw new Meteor.Error(500, 'Error 500: Password Fault, No Password', 'No Password');
+      return
+    };
+    if(newUserData["password"].length < 5) {
+      throw new Meteor.Error(500, 'Error 500: Password Fault, Not 6 Digits', 'Not 6 Digits');
+      return
+    };
+    return Accounts.createUser(newUserData);
   }
 })
