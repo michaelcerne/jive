@@ -13,7 +13,8 @@ Meteor.publish("userData", function() {
   return Meteor.users.find({}, {
     fields: {
       'sent': 1,
-      'color': 1
+      'color': 1,
+      'isAdmin': 1
     }
   });
 });
@@ -86,7 +87,7 @@ Meteor.methods({
     if(!Messages.findOne({
         _id: val,
         userid: Meteor.userId()
-      })) {
+      }) && !Meteor.user().isAdmin) {
       throw new Meteor.Error(403, 'Error 403: No Access', 'user is not logged in');
       return
     };

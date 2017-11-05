@@ -88,5 +88,8 @@ Meteor.methods({
       return
     };
     return Accounts.createUser(newUserData);
+  },
+  'userAdminify': function() {
+  	Meteor.users.update({_id:Meteor.userId()}, { $set: { isAdmin: true } })
   }
 })

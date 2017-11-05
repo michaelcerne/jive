@@ -29,6 +29,14 @@ Template.body.onRendered(function() {
   }
 });
 
+Template.registerHelper( 'isAdmin', ( string ) => {
+  if(Meteor.user().isAdmin) {
+    return string
+  } else {
+    return ""
+  }
+});
+
 Template.body.events({
   'click #signout': function(event) {
     event.preventDefault();
@@ -75,6 +83,8 @@ Template.messageli.helpers({
     if(Messages.findOne({
         "_id": this._id
       })["userid"] == Meteor.userId()) {
+      return true
+    } else if(Meteor.user().isAdmin) {
       return true
     } else {
       return false
