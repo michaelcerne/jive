@@ -17,6 +17,10 @@ Template.body.onCreated(function bodyOnCreated() {
   Meteor.subscribe('Messages');
 });
 
+Template.messageinput.onCreated(function() {
+  this.errorstate = new ReactiveVar('');
+});
+
 Template.body.onRendered(function() {
   var root = document.getElementById('root');
   var path = document.location.pathname;
@@ -30,7 +34,7 @@ Template.body.onRendered(function() {
 });
 
 Template.registerHelper( 'isAdmin', ( string ) => {
-  if(Meteor.user().isAdmin) {
+  if(Meteor.user() && Meteor.user().isAdmin) {
     return string
   } else {
     return ""
@@ -98,6 +102,22 @@ Template.messageinput.helpers({
   },
   'usercolor': function() {
     return Meteor.user()["color"]
+  },
+  'error': function() {
+    var template = Template.instance();
+    if(!template.errorstate.get() == "") {
+      return true
+    } else {
+      return false
+    }
+  },
+  'errorval': function() {
+    var template = Template.instance();
+    var errortype = template.errorstate.get();
+    if(errortype == "Error: Error 406: Message Overdraw [406]") {
+      return "Sorry, that message is a bit long. Keep it less than 280 characters."
+    };
+    return "Uh oh! There was an error sending your message! Please try again!";
   }
 });
 
@@ -119,10 +139,16 @@ Template.statusBar.events({
 });
 
 Template.messageinput.events({
-  'submit form': function(event) {
+  'submit form': function(event, template) {
     event.preventDefault();
     var val = document.getElementById('msgval').value;
-    Meteor.call('msgadd', val);
+    Meteor.call('msgadd', val, function(error) {
+      if(error) {
+        template.errorstate.set(error)
+      } else {
+        template.errorstate.set("")
+      }
+    });
     document.getElementById('msgval').value = ""
   }
 });

@@ -27,6 +27,10 @@ Meteor.methods({
       throw new Meteor.Error(403, 'Error 403: No Access', 'user is not logged in');
       return
     };
+    if(val.length > 280) {
+      throw new Meteor.Error(406, 'Error 406: Message Overdraw', 'user sent long message, over 280');
+      return
+    };
     if(count(Messages.find({}, {
         sort: {
           "createdAt": 1

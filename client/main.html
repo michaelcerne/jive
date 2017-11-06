@@ -88,6 +88,11 @@
 
 <template name="messageinput">
   {{#if currentUser }}
+    {{#if error}}
+      <div class="notification is-danger" id="err">
+        {{errorval}}
+      </div>
+    {{/if}}
     <form class="field has-addons">
       <div class="control">
         <p type="submit" style="cursor:default;background:{{usercolor}}" class="button">{{username}}:</p>
