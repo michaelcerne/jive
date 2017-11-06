@@ -4,3 +4,8 @@ div#mod {
 	left: 0;
 	color: red;
 }
+
+div#msgbox {
+  overflow-y: scroll;
+  max-height: 75vh;
+}

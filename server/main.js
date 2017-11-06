@@ -37,7 +37,7 @@ Meteor.methods({
         sort: {
           "createdAt": 1
         }
-      }).fetch()) >= 5) {
+      }).fetch()) >= 25) {
       var postval = Messages.find({}, {
         sort: {
           "createdAt": 1
