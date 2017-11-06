@@ -35,8 +35,13 @@
         </a>
       {{/if}}
     </div>
-    <div class="navbar-end">
-      {{> statusBar}}
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item">
+            {{> isType}}
+        </a>
+        {{> statusBar}}
+      </div>
     </div>
   </nav>
   <div class="columns">
@@ -87,7 +92,6 @@
 </template>
 
 <template name="messageinput">
-  {{> isType}}
   {{#if currentUser }}
     {{#if error}}
       <div class="notification is-danger" id="err">
@@ -105,6 +109,9 @@
         <button type="submit" class="button is-link">Send</button>
       </div>
     </form>
+    <div class="is-hidden-desktop">
+      {{> isType}}
+    </div>
   {{else}}
     <p>Login to message</p>
     <form class="field has-addons" alt="Login to message">
@@ -126,5 +133,5 @@
 </template>
 
 <template name="isType">
-  <span class="tag is-black">Typing: {{#each users}}{{username}} {{userTyping1}} {{/each}}</span>
+  {{#if userTyping}}<span class="tag is-info">Typing: {{#each users}}{{username}} {{userTyping1}} {{/each}}</span>{{/if}}
 </template>
