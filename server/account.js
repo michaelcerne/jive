@@ -62,6 +62,7 @@ function rndcolor() {
 Accounts.onCreateUser((options, user) => {
   var rndcol = rndcolor();
   user.color = rndcol;
+  user.isTyping = false;
   return user;
 });
 
@@ -89,7 +90,14 @@ Meteor.methods({
     };
     return Accounts.createUser(newUserData);
   },
-  'userAdminify': function() {
+  'userAdminify': function(val) {
   	Meteor.users.update({_id:Meteor.userId()}, { $set: { isAdmin: true } })
+  },
+  'userTyping': function(val) {
+    if(val == true) {
+      Meteor.users.update({_id:Meteor.userId()}, { $set: { isTyping : true }})
+    } else {
+      Meteor.users.update({_id:Meteor.userId()}, { $set: { isTyping : false }})
+    }
   }
 })

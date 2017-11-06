@@ -150,7 +150,13 @@ Template.messageinput.events({
       }
     });
     document.getElementById('msgval').value = ""
-  }
+    Meteor.call('userTyping', false)
+  },
+  'keydown form': function(event, template) {
+    console.log("Yed");
+    Meteor.call('userTyping', true)
+    Meteor.setTimeout(function(){Meteor.call('userTyping', false)}, 5000)
+  },
 });
 
 Template.messageli.events({
@@ -158,5 +164,25 @@ Template.messageli.events({
     event.preventDefault();
     var val = this._id;
     Meteor.call('msgdel', val)
+  }
+});
+
+Template.isType.helpers({
+  'users': function() {
+    return Meteor.users.find({"isTyping":true})
+  },
+  'userTyping': function() {
+    if(Meteor.users.find({"isTyping":true}).fetch()[0] == undefined) {
+      return false
+    } else {
+      return true
+    }
+  },
+  'userTyping1': function() {
+    if(Meteor.users.find({"isTyping":true}).fetch().length > 1) {
+      return "|"
+    } else {
+      return ""
+    }
   }
 });

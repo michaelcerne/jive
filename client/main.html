@@ -87,6 +87,7 @@
 </template>
 
 <template name="messageinput">
+  {{> isType}}
   {{#if currentUser }}
     {{#if error}}
       <div class="notification is-danger" id="err">
@@ -122,4 +123,8 @@
   <a class="navbar-item" href="{{statusLink}}">
     {{status}}
   </a>
+</template>
+
+<template name="isType">
+  <span class="tag is-black">Typing: {{#each users}}{{username}} {{userTyping1}} {{/each}}</span>
 </template>

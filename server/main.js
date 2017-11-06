@@ -13,8 +13,10 @@ Meteor.publish("userData", function() {
   return Meteor.users.find({}, {
     fields: {
       'sent': 1,
+      'username': 1,
       'color': 1,
-      'isAdmin': 1
+      'isAdmin': 1,
+      'isTyping': 1
     }
   });
 });
