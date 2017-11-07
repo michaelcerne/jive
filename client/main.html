@@ -37,9 +37,9 @@
     </div>
     <div class="navbar-menu">
       <div class="navbar-end">
-        <a class="navbar-item">
+        <p class="navbar-item">
             {{> isType}}
-        </a>
+        </p>
         {{> statusBar}}
       </div>
     </div>
@@ -60,6 +60,13 @@
 </template>
 
 <template name="messages">
+  {{#if exists}}
+    <div style="text-align:center">
+      <h1 class="is-size-1">Something's missing...</h1>
+      <h3 class="is-size-3">Maybe you should add a message...</h3>
+      <h3 class="is-size-3">Try it down below!</h3>
+    </div>
+  {{/if}}
   <div id="msgbox">
     {{#each message}}
       {{> messageli}}
@@ -77,15 +84,15 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <strong>{{username}}</strong> <small>@{{username}}</small> <small>{{time}}</small>
+          <strong>{{username}}</strong> <small>@{{username}}</small> <small>{{time}}</small> {{#if adminMsg}}<small style="color:red">admin</small>{{/if}}
           <br>
           {{content}}
         </p>
       </div>
     </div>
     <div class="media-right">
-      {{#if owned}}
-        <button class="delete msgdel"></button>
+      {{#if or owned admin}}
+        {{#unless owned}}<span class="tag is-warning" title="You didn't create this message. Modifying it will require admin permissions.">caution</span>{{/unless}} <button class="delete msgdel"></button>
       {{/if}}
     </div>
   </article>

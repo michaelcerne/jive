@@ -12,6 +12,10 @@ Accounts.ui.config({
   passwordSignupFields: 'USERNAME_ONLY'
 });
 
+Template.registerHelper('or',(a,b)=>{
+  return a || b;
+});
+
 Template.body.onCreated(function bodyOnCreated() {
   Meteor.subscribe('userData');
   Meteor.subscribe('Messages');
@@ -51,6 +55,20 @@ Template.body.events({
 Template.messages.helpers({
   'message': function() {
     return Messages.find();
+  },
+  'exists': function() {
+    if(Messages.find().fetch()[0] == undefined) {
+      return true
+    } else {
+      return false
+    }
+  }
+});
+
+Template.messageli.onRendered(function() {
+  var target = document.getElementById('msgbox');
+  if(target.scrollTop + 97 === (target.scrollHeight - target.offsetHeight)) {
+    target.scrollTop = target.scrollHeight
   }
 });
 
@@ -88,7 +106,20 @@ Template.messageli.helpers({
         "_id": this._id
       })["userid"] == Meteor.userId()) {
       return true
-    } else if(Meteor.user().isAdmin) {
+    } else {
+      return false
+    }
+  },
+  'admin': function() {
+    if(Meteor.user().isAdmin) {
+      return true
+    } else {
+      return false
+    }
+  },
+  'adminMsg': function() {
+    var usr = Messages.findOne({"_id":this._id})["userid"];
+    if(Meteor.users.findOne({"_id":usr})["isAdmin"]) {
       return true
     } else {
       return false
@@ -153,9 +184,9 @@ Template.messageinput.events({
     Meteor.call('userTyping', false)
   },
   'keydown form': function(event, template) {
-    console.log("Yed");
-    Meteor.call('userTyping', true)
-    Meteor.setTimeout(function(){Meteor.call('userTyping', false)}, 5000)
+    Meteor.call('userTyping', true);
+    Meteor.clearTimeout(timeout);
+    var timeout = Meteor.setTimeout(function(){Meteor.call('userTyping', false)}, 5000)
   },
 });
 
