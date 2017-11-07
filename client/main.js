@@ -7,6 +7,7 @@ import { Streamy } from 'meteor/yuukan:streamy';
 
 import './main.html';
 import './login.js';
+import './settings.js';
 
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_ONLY'

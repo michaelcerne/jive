@@ -1,0 +1,29 @@
+<template name="settings">
+	<nav class="level">
+	  <div class="level-item has-text-centered">
+	    <div>
+	      <p class="heading">Lifetime Sent</p>
+	      <p class="title">{{sent}}</p>
+	    </div>
+	  </div>
+	  <div class="level-item has-text-centered">
+	    <div>
+	      <p class="heading">Me</p>
+	      <p class="title">{{username}}</p>
+	    </div>
+	  </div>
+	  <div class="level-item has-text-centered">
+	    <div>
+	      <p class="heading">My Color</p>
+	      <p class="title">{{color}}</p>
+	    </div>
+	  </div>
+	</nav>
+	<div>
+		<p>Set Color</p>
+		<form id="colorf">
+			<input id="colorval" type="color">
+			<button type="submit" class="button is-primary">Set Color</button>
+		</form>
+	</div>
+</template>

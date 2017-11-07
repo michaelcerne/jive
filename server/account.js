@@ -99,5 +99,8 @@ Meteor.methods({
     } else {
       Meteor.users.update({_id:Meteor.userId()}, { $set: { isTyping : false }})
     }
+  },
+  'userColor': function(val) {
+  	Meteor.users.update({_id:Meteor.userId()}, { $set: { color: val } })
   }
 })
