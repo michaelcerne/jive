@@ -32,6 +32,8 @@ Template.body.onRendered(function() {
     Blaze.render(Template.login, root)
   } else if(path == "/signup") {
     Blaze.render(Template.signup, root)
+  } else if(path == "/settings") {
+    Blaze.render(Template.settings, root)
   } else {
     Blaze.render(Template.main, root)
   }
@@ -79,9 +81,7 @@ Template.messageli.helpers({
     }).fetch()[0]["createdAt"]).fromNow();
   },
   'color': function() {
-    return Messages.findOne({
-      "_id": this._id
-    })["color"]
+    return Meteor.users.findOne({_id:this.userid})["color"]
   },
   'usernamechar': function() {
     var str = Messages.findOne({
