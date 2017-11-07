@@ -111,7 +111,7 @@ Template.messageli.helpers({
     }
   },
   'admin': function() {
-    if(Meteor.user().isAdmin) {
+    if(Meteor.user() && Meteor.user().isAdmin) {
       return true
     } else {
       return false
