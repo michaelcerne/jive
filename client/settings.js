@@ -16,7 +16,12 @@ Template.settings.helpers({
 			return Meteor.user().username
 		}
 	},
-	'color': function() {
+	'color': function(){
+		if(Meteor.user()) {
+			return Meteor.user().color
+		}
+	},
+	'colorname': function() {
 		if(Meteor.user()) {
 			userColorDep.depend();
     	return ntc.name(Meteor.user().color)[1]
