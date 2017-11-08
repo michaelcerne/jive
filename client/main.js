@@ -9,6 +9,19 @@ import './main.html';
 import './login.js';
 import './settings.js';
 
+function switchView(val) {
+  function targetview() {
+    if(Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0]).parentView) {
+      return Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0]).parentView
+    } else {
+      return Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0])
+    }
+  }
+  event.preventDefault();
+  Blaze.remove(targetview());
+  Blaze.render(val, document.getElementById('root'))
+}
+
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_ONLY'
 });
@@ -54,40 +67,13 @@ Template.body.events({
     Accounts.logout()
   },
   'click #login': function(event) {
-    function targetview() {
-      if(Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0]).parentView) {
-        return Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0]).parentView
-      } else {
-        return Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0])
-      }
-    }
-    event.preventDefault();
-    Blaze.remove(targetview());
-    Blaze.render(Template.login, document.getElementById('root'))
+    switchView(Template.login)
   },
   'click #signup': function(event) {
-    function targetview() {
-      if(Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0]).parentView) {
-        return Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0]).parentView
-      } else {
-        return Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0])
-      }
-    }
-    event.preventDefault();
-    Blaze.remove(targetview());
-    Blaze.render(Template.signup, document.getElementById('root'))
+    switchView(Template.signup)
   },
   'click #home': function(event) {
-    function targetview() {
-      if(Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0]).parentView) {
-        return Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0]).parentView
-      } else {
-        return Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0])
-      }
-    }
-    event.preventDefault();
-    Blaze.remove(targetview());
-    Blaze.render(Template.main, document.getElementById('root'))
+    switchView(Template.main)
   }
 });
 
