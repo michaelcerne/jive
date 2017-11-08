@@ -52,6 +52,42 @@ Template.body.events({
   'click #signout': function(event) {
     event.preventDefault();
     Accounts.logout()
+  },
+  'click #login': function(event) {
+    function targetview() {
+      if(Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0]).parentView) {
+        return Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0]).parentView
+      } else {
+        return Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0])
+      }
+    }
+    event.preventDefault();
+    Blaze.remove(targetview());
+    Blaze.render(Template.login, document.getElementById('root'))
+  },
+  'click #signup': function(event) {
+    function targetview() {
+      if(Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0]).parentView) {
+        return Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0]).parentView
+      } else {
+        return Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0])
+      }
+    }
+    event.preventDefault();
+    Blaze.remove(targetview());
+    Blaze.render(Template.signup, document.getElementById('root'))
+  },
+  'click #home': function(event) {
+    function targetview() {
+      if(Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0]).parentView) {
+        return Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0]).parentView
+      } else {
+        return Blaze.getView(document.getElementById('root').getElementsByTagName('div')[0])
+      }
+    }
+    event.preventDefault();
+    Blaze.remove(targetview());
+    Blaze.render(Template.main, document.getElementById('root'))
   }
 });
 

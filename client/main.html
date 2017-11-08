@@ -16,7 +16,7 @@
 <body>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="/">
+      <a class="navbar-item" id="home">
         <img src="/img/jive-markup.png" alt="jive - messaging">
       </a>
       {{#if currentUser}}
@@ -27,10 +27,10 @@
           <a>Sign out</a>
         </a>
       {{else}}
-        <a class="navbar-item" href="/signup">
+        <a class="navbar-item" id="signup">
           <a>Sign Up</a>
         </a>
-        <a class="navbar-item" href="/login">
+        <a class="navbar-item" id="login">
           <a>Log In</a>
         </a>
       {{/if}}
